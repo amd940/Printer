@@ -10,7 +10,8 @@ Printer features many things you'd expect from a jQuery plugin:
 - A robust API
 - Super simple setup
 - Low overhead
-- Highly customizable
+- Highly customizable behavior and appearance
+- Cross browser compatible
 
 Printer also features:
 - Super smooth CSS animations
