@@ -45,8 +45,8 @@
 			$(printer+' '+settings.sidebar).addClass('sidebar');
 			$(printer+' '+settings.tray).addClass('tray');
 			
-			// Load initial page if random is off.
-			if (settings.direction != 'random') {
+			// Load initial page if slideshow is off.
+			if (settings.slideshow != true) {
 				isLoading = true;
 				$(printer+' '+settings.tray).addClass('loading');
 				$(printer+' '+settings.tray + ' .page0').css('opacity', '0');
