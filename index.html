@@ -11,6 +11,8 @@
 <script>
 $(document).ready(function(e) {
 	$('#printer').printer();
+	$('#printer-slideshow').printer({ slideshow: true });
+	$('#printer-random').printer({ direction: 'random' });
 });
 </script>
 <style type="text/css">
@@ -23,13 +25,35 @@ body {
 }
 h1 {
 	font-family: High Thin;
+	font-size: 36px;
+	text-align: center;
 }
 </style>
 </head>
 
 <body>
-<h1>The most basic Printer.</h1>
+<h1>The simplest Printer.</h1>
 <div id="printer">
+	<div id="sidebar">
+			<a href="page1.html">Page 1</a>
+			<a href="page2.html">Page 2</a>
+			<a href="page3.html">Page 3</a>
+			<a href="page4.html">Page 4</a>
+	</div>
+	<div id="tray"></div>
+</div>
+<h1>The slideshow Printer.</h1>
+<div id="printer-slideshow">
+	<div id="sidebar">
+			<a href="page1.html">Page 1</a>
+			<a href="page2.html">Page 2</a>
+			<a href="page3.html">Page 3</a>
+			<a href="page4.html">Page 4</a>
+	</div>
+	<div id="tray"></div>
+</div>
+<h1>The random Printer.</h1>
+<div id="printer-random">
 	<div id="sidebar">
 			<a href="page1.html">Page 1</a>
 			<a href="page2.html">Page 2</a>
