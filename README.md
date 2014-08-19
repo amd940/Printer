@@ -57,7 +57,7 @@ Why, yes, there is.
 
 
 ###Options
-Options|Default Setting|Description
+Option |Default Setting|Description
 -------|:---------:|---------
 height | `"200px"` | Specifies the height of the entire printer.
 width  | `"auto"`  | Specifies the width of the entire printer.
