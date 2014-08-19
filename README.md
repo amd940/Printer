@@ -77,8 +77,10 @@ Event|Description
 -------|-----------
 onlick | Fires when the user clicks on a hyperlink in the sidebar.
 onload | Fires when the plugin has fully finished loading.
-onprint| Fires when the page content has been retreived and the page begins to print.
+onbeforeprint| Fires when the AJAX request is complete but the page has not yet begun to print.
+onprint| Fires when the page begins to print.
 onprintcomplete| Fires when the page has finished printing.
+
 
 
 ##Can I use this for my own project/website/etc?
