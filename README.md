@@ -31,10 +31,10 @@ Next, add the needed HTML:
 ```html
 <div id="printer">
 	<div id="sidebar">
-			<a href="page1.html">Page 1</a>
-			<a href="page2.html">Page 2</a>
-			<a href="page3.html">Page 3</a>
-			<a href="page4.html">Page 4</a>
+		<a href="page1.html">Page 1</a>
+		<a href="page2.html">Page 2</a>
+		<a href="page3.html">Page 3</a>
+		<a href="page4.html">Page 4</a>
 	</div>
 	<div id="tray"></div>
 </div>
@@ -56,7 +56,7 @@ Why, yes, there is.
 
 ###Properties
 Property|Default Setting|Description
--------|-----------|---------
+-------|:---------:|---------
 height | `"200px"` | Specifies the height of the entire printer.
 width  | `"auto"`  | Specifies the width of the entire printer.
 speed  | `1400`    | The speed at which each new Page is Printed, specified in milliseconds.
@@ -66,7 +66,7 @@ sidebar| `#sidebar`| The id (or class) of the element that will serve as the sid
 
 ###Methods
 Method|Arguments|Description
--------|-----------|---------
+-------|:---------:|---------
 reset  |`[options]`| Reset the entire printer to it's original state. Accepts an optional new set of options as an object.
 destroy| none      | Remove all traces of the printer in question.
 
