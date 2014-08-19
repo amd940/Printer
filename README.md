@@ -76,3 +76,15 @@ Event|Description
 onload | Fires when the plugin has fully finished loading.
 onprint| Fires when the page content has been retreived and the page begins to print.
 onprintcomplete| Fires when the page has finished printing.
+
+##Can I use this for my own project/website/etc?
+Printer is licensed under the [MIT License](http://opensource.org/licenses/MIT), which means it is free to be used in whatever you wish to use it in. In other words, go nuts!
+
+
+##Credits
+I'd like to thank [Daniel Eden](https://github.com/daneden) for his super awesome animate.css file. See it in action [here](http://daneden.github.io/animate.css/).
+
+Also, many thanks to GitHub for providing this awesome hosting platform free of charge.
+
+##Disclaimer
+This is my first ever GitHub repo so I apologize in advance if any of it's not up to par.
