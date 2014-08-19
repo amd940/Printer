@@ -63,8 +63,8 @@ height | `"200px"` | Specifies the height of the entire printer.
 width  | `"auto"`  | Specifies the width of the entire printer.
 speed  | `1400`    | The speed at which each new Page is Printed, specified in milliseconds.
 shading| `true`    | Enable or disable the CSS box-shadow shading of the printer's UI.
-tray   | `#tray`   | The id (or class) of the element that will serve as the tray.
-sidebar| `#sidebar`| The id (or class) of the element that will serve as the sidebar.
+tray   | `"#tray"`   | The id (or class) of the element that will serve as the tray. (**Warning**: The tray must be inside of the printer.)
+sidebar| `"#sidebar"`| The id (or class) of the element that will serve as the sidebar. (**Warning**: The sidebar must be inside of the printer.)
 
 ###Methods
 Method|Arguments|Description
