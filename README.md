@@ -49,7 +49,7 @@ $('#printer').printer();
 **That's it!** Wasn't that easy?
 
 ##Why the name "Printer"?
-Ah, I'm glad you asked. Mostly because the plugin's visual representation and core concept very loosly resembles a printer. If you look through the HTML in the example above, you'll notice names resembling parts of a printer (mostly). There's the "sidebar" where links sit on the left, and a "tray" where the "page" prints into.
+Ah, I'm glad you asked. Mostly because the plugin's visual representation and core concept very loosly resembles a printer. If you look through the HTML in the [example](http://amd940.github.io/Printer/) above, you'll notice names resembling parts of a printer (mostly). There's the "sidebar" where links sit on the left, and a "tray" where the "page" prints into.
 
 ##Is there an API reference?
 Why, yes, there is.
