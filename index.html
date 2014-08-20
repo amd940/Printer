@@ -7,13 +7,6 @@
 <link type="text/css" rel="stylesheet" href="css/jquery.printer.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="jquery.printer.js" type="text/javascript"></script>
-<script>
-$(document).ready(function(e) {
-	$('#printer').printer();
-	$('#printer-slideshow').printer({ slideshow: true });
-	$('#printer-random').printer({ direction: 'random' });
-});
-</script>
 <style type="text/css">
 @font-face {
 	src: url(High%20Thin%20LIGHT.ttf);
@@ -47,6 +40,13 @@ a:active {
 	text-decoration: none;
 }
 </style>
+<script>
+$(document).ready(function(e) {
+	$('#printer').printer();
+	$('#printer-slideshow').printer({ slideshow: true });
+	$('#printer-random').printer({ direction: 'random' });
+});
+</script>
 </head>
 
 <body>
