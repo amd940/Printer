@@ -12,19 +12,25 @@
 			
 			// Extend the options var.
 			var settings = $.extend({
+				// Options
 				sidebar: 'left',
 				height: 'auto',
 				width: 'auto',
-				speed: 1400,
+				speed: 1000,
 				shading: true,
 				tray: '#tray',
 				sidebar: '#sidebar',
-				easing: 'swing',
 				direction: 'left',
 				slideshow: 'false',
 				slideshowSpeed: 5000,
 				errorMessage: 'There was an internal server error, please try again.',
-				criticalErrorMessage: 'The server is not working as expected, please contact the webmaster for assistance.'
+				criticalErrorMessage: 'The server is not working as expected, please contact the webmaster for assistance.',
+				// Events (Callbacks)
+				onClick: function() {},
+				onLoad: function() {},
+				onBeforePrint: function() {},
+				onPrint: function() {},
+				onPrintComplete: function() {}
 			}, options);
 			
 			// Set up some interal reference vars.
@@ -35,9 +41,11 @@
 			var direction;
 			
 			// Inject needed HTML
+			var neededHTML = "";
 			for(var i = 0; i < 2; i++) {
-				$(printer+' '+settings.tray).append('<div class="page'+i+' page"><div class="page-gutter"></div></div>');
+				neededHTML += '<div class="page'+i+' page"><div class="page-gutter"></div></div>';
 			}
+			$(printer+' '+settings.tray).html(neededHTML);
 			$(printer+' '+settings.tray).after('<div style="clear: both;"></div>');
 			
 			// Add needed CSS
@@ -63,6 +71,7 @@
 							$(printer+' '+settings.tray + ' .page1').removeAttr('style');
 							$(printer + ' ' + settings.tray).removeClass('loading');
 							isLoading = false;
+							settings.onLoad.call(printer);
 						}
 					},
 					error: function() {
@@ -74,6 +83,7 @@
 							$(printer + ' ' + settings.tray + ' .page0').removeClass('animated fadeIn');
 							$(printer + ' ' + settings.sidebar + ' a').removeClass('loading');
 							isLoading = false;
+							settings.onLoad.call(printer);
 						}
 					}
 				});
@@ -87,6 +97,7 @@
 			//
 			$('body').on('click', printer + ' ' + settings.sidebar + ' a', function(event) {
 				event.preventDefault();
+				settings.onClick.call(event);
 				if (isLoading == false) {
 					isLoading = true;
 					// Set up direction var if direction is set to random.
@@ -112,13 +123,17 @@
 					$(this).addClass('loading');
 					$.ajax(grabURL(this), {
 						success: function (data) {
+							errorCount = 0;
+							settings.onBeforePrint.call(data);
 							printPage(data);
 						},
 						error: function() {
 							errorCount++;
 							if (errorCount < 5) {
+								settings.onBeforePrint.call(settings.errorMessage);
 								printPage('<p>'+settings.errorMessage+'</p>');
 							} else {
+								settings.onBeforePrint.call(settings.criticalErrorMessage);
 								printPage('<p>'+settings.criticalErrorMessage+'</p>');
 								errorCount = 0;
 							}
@@ -151,6 +166,7 @@
 			// Helper Functions
 			//
 			function printPage(pageContents) {
+				settings.onPrint.call(printer);
 				/*$(printer + ' ' + settings.tray + ' .page' + (currentPage+1)).html('<div class="page-gutter">'+pageContents+'</div>').animate({
 					left: '0'+'px'
 				}, settings.speed, settings.easing, function() {
@@ -171,6 +187,7 @@
 					$(printer + ' ' + settings.tray + ' .page0').removeClass('animated fadeIn'+capitalize(direction)+'Big');
 					$(printer + ' ' + settings.sidebar + ' a').removeClass('loading');
 					isLoading = false;
+					settings.onPrintComplete.call();
 				}
 			}
 			
