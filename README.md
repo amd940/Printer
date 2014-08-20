@@ -24,8 +24,7 @@ Printer also features:
 It couldn't be simpler (well, maybe it could). First, import the dependent files in the page head:
 ```html
 <link type="text/css" rel="stylesheet" href="css/jquery.printer.css">
-<link type="text/css" rel="stylesheet" href="css/animate.css">
-<script src="scripts/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="scripts/jquery.printer.js"></script>
 ```
 
@@ -61,25 +60,29 @@ Option |Default Setting|Description
 -------|:---------:|---------
 height | `"200px"` | Specifies the height of the entire printer.
 width  | `"auto"`  | Specifies the width of the entire printer.
-speed  | `1400`    | The speed at which each new Page is Printed, specified in milliseconds.
+speed  | `1000`    | The speed at which each new page is printed, specified in milliseconds.
 shading| `true`    | Enable or disable the CSS box-shadow shading of the printer's UI.
 tray   | `"#tray"`   | The id (or class) of the element that will serve as the tray. (**Warning**: The tray must be inside of the printer.)
 sidebar| `"#sidebar"`| The id (or class) of the element that will serve as the sidebar. (**Warning**: The sidebar must be inside of the printer.)
+slideshow| `false` | Whether or not to enable slideshow mode.
+slideshowSpeed| `5000` | The length of time between the printer completing a page print and the printer requesting the next page, specified in milliseconds.
+errorMessage| `"There was an internal server error, please try again."` | The error message to display to the user in the event that the AJAX request fails.
+criticalErrorMessage| `"The server is not working as expected, please contact the webmaster for assistance."` | The error message to display to the user in the event the AJAX requests persistently fail.
 
 ###Methods
-Method|Arguments|Description
+Method | Arguments |Description
 -------|:---------:|---------
 reset  |`[options]`| Reset the entire printer to it's original state. Accepts an optional new set of options as an object.
 destroy| none      | Remove all traces of the printer in question.
 
 ###Events
-Event|Description
--------|-----------
-onlick | Fires when the user clicks on a hyperlink in the sidebar.
-onload | Fires when the plugin has fully finished loading.
-onbeforeprint| Fires when the AJAX request is complete but the page has not yet begun to print.
-onprint| Fires when the page begins to print.
-onprintcomplete| Fires when the page has finished printing.
+Event  |  Returns  |Description
+-------|:---------:|--------
+onClick|  `event`  | Fires when the user clicks on a hyperlink in the sidebar.
+onLoad | active printer's `"selector"` | Fires when the plugin has fully finished loading.
+onBeforePrint| `pageContents` or `"errorMessage"` | Fires when the AJAX request is complete but the page has not yet begun to print.
+onPrint| active printer's `"selector"` | Fires when the page begins to print.
+onPrintComplete| active printer's `"selector"` | Fires when the page has finished printing.
 
 
 
