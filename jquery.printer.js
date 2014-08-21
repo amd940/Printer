@@ -125,6 +125,7 @@
 					state = state.url;
 					if (state.indexOf('?') === -1) {
 						History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).attr('href'));
+						console.log("?"+printer+"="+$(this).attr('href'));
 					} else {
 						state = state.split('?');
 						state = state[1];
