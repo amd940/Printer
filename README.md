@@ -18,7 +18,7 @@ Printer also features:
 - Slideshow mode
 - Adaptive height mode (Not yet implemented)
 - Random page printing direction mode
-- Intelligent State Handling (via [History.js](https://github.com/browserstate/history.js), Not yet implemented)
+- Intelligent State Handling (via [History.js](https://github.com/browserstate/history.js), Nearly finished)
 
 ##How do I use it?
 It couldn't be simpler (well, maybe it could). First, import the dependent files in the page head:
@@ -64,7 +64,8 @@ speed  | `1000`    | The speed at which each new page is printed, specified in m
 shading| `true`    | Enable or disable the CSS box-shadow shading of the printer's UI.
 tray   | `"#tray"`   | The id (or class) of the element that will serve as the tray. (**Warning**: The tray must be inside of the printer.)
 sidebar| `"#sidebar"`| The id (or class) of the element that will serve as the sidebar. (**Warning**: The sidebar must be inside of the printer.)
-slideshow| `false` | Whether or not to enable slideshow mode.
+history| `true`    | Whether or not to enable history/state functionality. If slideshow is set to `true` it will disable this feature.
+slideshow| `false` | Whether or not to enable slideshow mode. Slideshow mode will **disable** history/state functionality.
 slideshowSpeed| `5000` | The length of time between the printer completing a page print and the printer requesting the next page, specified in milliseconds.
 errorMessage| `"There was an internal server error, please try again."` | The error message to display to the user in the event that the AJAX request fails.
 criticalErrorMessage| `"The server is not working as expected, please contact the webmaster for assistance."` | The error message to display to the user in the event the AJAX requests persistently fail.
