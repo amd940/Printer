@@ -39,6 +39,7 @@
 			var isLoading = false;
 			var errorCount = 0;
 			var direction;
+			var stateNo = 0;
 			
 			// Inject needed HTML
 			var neededHTML = "";
@@ -116,6 +117,10 @@
 			$('body').on('click', printer + ' ' + settings.sidebar + ' a', function(event) {
 				event.preventDefault();
 				settings.onClick.call(event);
+				if (settings.slideshow === false) {
+					stateNo++;
+					History.pushState({state:stateNo}, $(this).html(), "?page="+$(this).html());
+				}
 				if (isLoading == false) {
 					isLoading = true;
 					// Set up direction var if direction is set to random.
@@ -160,10 +165,12 @@
 				}
 			});
 			
-			History.Adapter.bind(window,'statechange',function(){
-				var state = History.getState();
-				console.log(state);
-			});
+			if (settings.slideshow === false) {
+				History.Adapter.bind(window,'statechange',function(){
+					var state = History.getState();
+					console.log(state);
+				});
+			}
 			
 			
 			
