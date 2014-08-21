@@ -118,35 +118,54 @@
 			$('body').on('click', printer + ' ' + settings.sidebar + ' a', function(event) {
 				event.preventDefault();
 				settings.onClick.call(event);
-				if (settings.slideshow === false && settings.history === true) {
-					stateNo++;
-					var url = '';
-					var state = History.getState();
-					state = state.url;
-					if (state.indexOf('?') === -1) {
-						History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).attr('href'));
-						console.log("?"+printer+"="+$(this).attr('href'));
-					} else {
-						state = state.split('?');
-						state = state[1];
-						// If the state URL only has one var in the query string.
-						if (state.indexOf('&') === -1) {
-							console.log(state);
-							keyValue = state.split('=');
-							if (keyValue[0] == printer) {
-								History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).attr('href'));
-							} else {
-								url = state + '&' + printer + '=' + $(this).attr('href');
-								History.pushState({state:stateNo}, $(this).html(), url);
-							}
-						// If the state URL has more than one var in the query string.
-						} else {
-							states = state.split('&');
-						}
-					}
-				}
+				
 				if (isLoading == false) {
 					isLoading = true;
+					
+					if (settings.slideshow === false && settings.history === true) {
+						stateNo++;
+						var url = '';
+						var state = window.location;
+						var b64EncodedHref = encodeURIComponent(utf8_to_b64($(this).attr('href')));
+						state = state.href;
+						if (state.indexOf('?') === -1) {
+							url = "?"+printer+"="+b64EncodedHref;
+							History.pushState({state:stateNo}, $(this).html(), url);
+						} else {
+							state = state.split('?')[1];
+							// If the state URL only has one var in the query string.
+							if (state.indexOf('&') === -1) {
+								keyValue = state.split('=');
+								if (keyValue[0] == printer) {
+									url = "?"+printer+"="+b64EncodedHref;
+									History.pushState({state:stateNo}, $(this).html(), url);
+								} else {
+									url = "?"+state + '&' + printer + '='+b64EncodedHref;
+									History.pushState({state:stateNo}, $(this).html(), url);
+								}
+							// If the state URL has more than one var in the query string.
+							} else {
+								url += '?';
+								states = state.split('&');
+								var len = states.length;
+								var foundOn;
+								for (var i = 0; i < len; i++) {
+									var currentState = states[i].split("=");
+									if (currentState[0] == printer) {
+										url += printer+'='+b64EncodedHref;
+										foundOn = i;
+									}
+								}
+								states.splice(foundOn,1);
+								len = states.length;
+								for (var i = 0; i < len; i++) {
+									url += "&"+states[i];
+								}
+								History.pushState({state:stateNo}, $(this).html(), url);
+							}
+						}
+					}
+					
 					// Set up direction var if direction is set to random.
 					if (settings.direction == 'random') {
 						switch(Math.floor(Math.random()*4)) {
@@ -236,6 +255,13 @@
 			}
 			function capitalize(string) {
 				return string.charAt(0).toUpperCase() + string.slice(1);
+			}
+			
+			function utf8_to_b64( str ) {
+				return window.btoa(unescape(encodeURIComponent( str )));
+			}
+			function b64_to_utf8( str ) {
+				return decodeURIComponent(escape(window.atob( str )));
 			}
 			
 			//
