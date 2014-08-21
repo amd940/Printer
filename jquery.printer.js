@@ -21,7 +21,7 @@
 				tray: '#tray',
 				sidebar: '#sidebar',
 				direction: 'left',
-				slideshow: 'false',
+				slideshow: false,
 				slideshowSpeed: 5000,
 				errorMessage: 'There was an internal server error, please try again.',
 				criticalErrorMessage: 'The server is not working as expected, please contact the webmaster for assistance.',
