@@ -124,17 +124,18 @@
 					var state = History.getState();
 					state = state.url;
 					if (state.indexOf('?') === -1) {
-						History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).html());
+						History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).attr('href'));
 					} else {
 						state = state.split('?');
 						state = state[1];
 						// If the state URL only has one var in the query string.
 						if (state.indexOf('&') === -1) {
+							console.log(state);
 							keyValue = state.split('=');
 							if (keyValue[0] == printer) {
-								History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).html());
+								History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).attr('href'));
 							} else {
-								url = state + '&' + printer + '=' + $(this).html();
+								url = state + '&' + printer + '=' + $(this).attr('href');
 								History.pushState({state:stateNo}, $(this).html(), url);
 							}
 						// If the state URL has more than one var in the query string.
