@@ -21,6 +21,7 @@
 				tray: '#tray',
 				sidebar: '#sidebar',
 				direction: 'left',
+				history: true,
 				slideshow: false,
 				slideshowSpeed: 5000,
 				errorMessage: 'There was an internal server error, please try again.',
@@ -117,9 +118,18 @@
 			$('body').on('click', printer + ' ' + settings.sidebar + ' a', function(event) {
 				event.preventDefault();
 				settings.onClick.call(event);
-				if (settings.slideshow === false) {
+				if (settings.slideshow === false && settings.history === true) {
 					stateNo++;
-					History.pushState({state:stateNo}, $(this).html(), "?page="+$(this).html());
+					var url = '';
+					var state = History.getState();
+					state = state.url;
+					if (state.indexOf('?') === -1) {
+						History.pushState({state:stateNo}, $(this).html(), "?"+printer+"="+$(this).html());
+					} else {
+						state = state.split('?');
+						state = state[1];
+						states = state.split('&');
+					}
 				}
 				if (isLoading == false) {
 					isLoading = true;
@@ -165,10 +175,10 @@
 				}
 			});
 			
-			if (settings.slideshow === false) {
+			if (settings.slideshow === false && settings.history === true) {
 				History.Adapter.bind(window,'statechange',function(){
 					var state = History.getState();
-					console.log(state);
+					//console.log(state);
 				});
 			}
 			
