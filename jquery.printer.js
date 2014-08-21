@@ -56,13 +56,29 @@
 			$(printer+' '+settings.tray).addClass('tray');
 			
 			// Load initial page if slideshow is off.
-			if (settings.slideshow !== true) {
+			if (settings.slideshow === false) {
 				isLoading = true;
 				$(printer+' '+settings.tray).addClass('loading');
 				$(printer+' '+settings.tray + ' .page0').css('opacity', '0');
 				$(printer+' '+settings.tray + ' .page1').css('opacity', '0');
 				
-				$.ajax($(printer+' '+settings.sidebar+' a').eq(0).attr('href'), {
+				// Find out whether we have a page to load in the URL or if we should just load the first one.
+				var state = window.location.href;
+				if (state.indexOf("?") === -1) {
+					var url = $(printer+' '+settings.sidebar+' a').eq(0).attr('href');
+				} else {
+					state = state.split("?")[1];
+					states = state.split('&');
+					var len = states.length;
+					for (var j = 0; j < len; j++) {
+						var keyValue = states[j].split("=");
+						if (keyValue[0] == printer) {
+							var url = b64_to_utf8(decodeURIComponent(keyValue[1]));
+						}
+					}
+				}
+				// Load and fade in specified page (or load error message if that fails).
+				$.ajax(url, {
 					success: function(data) {
 						$(printer+' '+settings.tray + ' .page0 .page-gutter').html(data);
 						
@@ -125,12 +141,11 @@
 					if (settings.slideshow === false && settings.history === true) {
 						stateNo++;
 						var url = '';
-						var state = window.location;
+						var state = window.location.href;
 						var b64EncodedHref = encodeURIComponent(utf8_to_b64($(this).attr('href')));
-						state = state.href;
 						if (state.indexOf('?') === -1) {
 							url = "?"+printer+"="+b64EncodedHref;
-							History.pushState({state:stateNo}, $(this).html(), url);
+							History.pushState(null, $(this).html(), url);
 						} else {
 							state = state.split('?')[1];
 							// If the state URL only has one var in the query string.
@@ -138,17 +153,16 @@
 								keyValue = state.split('=');
 								if (keyValue[0] == printer) {
 									url = "?"+printer+"="+b64EncodedHref;
-									History.pushState({state:stateNo}, $(this).html(), url);
+									History.pushState(null, $(this).html(), url);
 								} else {
 									url = "?"+state + '&' + printer + '='+b64EncodedHref;
-									History.pushState({state:stateNo}, $(this).html(), url);
+									History.pushState(null, $(this).html(), url);
 								}
 							// If the state URL has more than one var in the query string.
 							} else {
 								url += '?';
 								states = state.split('&');
-								var len = states.length;
-								var foundOn;
+								var len = states.length, foundOn;
 								for (var i = 0; i < len; i++) {
 									var currentState = states[i].split("=");
 									if (currentState[0] == printer) {
@@ -161,7 +175,7 @@
 								for (var i = 0; i < len; i++) {
 									url += "&"+states[i];
 								}
-								History.pushState({state:stateNo}, $(this).html(), url);
+								History.pushState(null, $(this).html(), url);
 							}
 						}
 					}
