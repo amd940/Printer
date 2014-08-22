@@ -76,7 +76,11 @@
 							var url = b64_to_utf8(decodeURIComponent(keyValue[1]));
 						}
 					}
+					if (url === undefined) {
+						var url = $(printer+' '+settings.sidebar+' a').eq(0).attr('href');
+					}
 				}
+				
 				// Load and fade in specified page (or load error message if that fails).
 				$.ajax(url, {
 					success: function(data) {
