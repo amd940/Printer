@@ -1,6 +1,9 @@
 Printer [v0.1.0-alpha]
 ======
-Printer is an AJAX style page loading jQuery plugin that retrieves the URL from each hyperlink in the sidebar on the fly upon being clicked. It can also function as a rudimentry slideshow (but keep in mind this plugin does not cache any resources, i.e. Printer will make a new AJAX request on each new slide).
+
+**Update**: Lately I haven't had much time to contribute to this project. If you like the sound of this project and would like to contribute please let me know. Thanks.
+
+Printer is an open source AJAX style page loading jQuery plugin that retrieves the URL from each hyperlink in the sidebar on the fly upon being clicked. It can also function as a rudimentry slideshow (but keep in mind this plugin does not cache any resources, i.e. Printer will make a new AJAX request on each new slide).
 
 ##So what is this exactly?
 Take a look [here](http://amd940.github.io/Printer/).
@@ -14,11 +17,15 @@ Printer features many things you'd expect from a jQuery plugin:
 - Cross browser compatible (for newer browsers, not yet tested in older browsers)
 
 Printer also features:
-- Super smooth CSS animations (Thanks [daneden](https://github.com/daneden)!)
+- Super smooth CSS animations (via [animate.css](https://github.com/daneden/animate.css))
 - Slideshow mode
-- Adaptive height mode (Not yet implemented)
 - Random page printing direction mode
 - Intelligent State Handling (via [History.js](https://github.com/browserstate/history.js), Nearly finished)
+
+Future Plans:
+- Resource caching
+- Adaptive height mode
+- jQuery UI theme adaptability
 
 ##How do I use it?
 It couldn't be simpler (well, maybe it could). First, import the dependent files in the page head:
